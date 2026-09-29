@@ -10,37 +10,57 @@
 @keyframes rv-safety { to { opacity: 1; transform: none; } }
 @keyframes loader-safety { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 
-/* Page loader + page-in.
+/* Page loader.
    Reuses the hero__badge spinner (see .hero__badge in components.css) as a
-   full-page loading indicator. Hidden the same defensive way as .rv: only
-   ever shown when scripting is on, and scripts/page-loader.js (main.js)
-   adds body.is-loaded once the page has finished loading — if that script
-   ever fails, loader-safety/rv-safety clear everything after a few seconds
-   anyway, so nothing can stay hidden or stuck spinning. */
-@media (scripting: enabled) {
-  .loader { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: var(--bg); transition: opacity .5s var(--ease), visibility .5s; animation: loader-safety .01s 4s forwards; }
-  .loader__badge { position: relative; width: clamp(84px, 8vw, 120px); aspect-ratio: 1; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; }
-  .loader__badge svg { width: 100%; height: 100%; animation: spin 1.4s linear infinite; }
-  .loader__badge text { font-family: var(--f-display); font-weight: 800; font-size: 11.4px; letter-spacing: .16em; text-transform: uppercase; fill: currentColor; }
-  .loader__badge b { position: absolute; font-size: clamp(1.1rem, 1.8vw, 1.6rem); }
-  body.is-loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; animation: none; }
+   full-page loading indicator. Always position:fixed — deliberately NOT
+   gated behind "@media (scripting: enabled)" like .rv below, because that
+   feature isn't supported everywhere (e.g. Safari): in a browser that
+   doesn't recognize it the whole block is ignored, and an un-positioned
+   .loader would render as a plain block at the top of the page, pushing
+   everything else down. scripts/page-loader.js (main.js) adds body.is-loaded
+   once the page has finished loading; loader-safety clears it after a few
+   seconds regardless, so nothing can stay stuck on screen. The <noscript>
+   in Layout.astro covers visitors with JavaScript off entirely. */
+.loader { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: var(--bg); transition: opacity .5s var(--ease), visibility .5s; animation: loader-safety .01s 4s forwards; }
+.loader__badge { position: relative; width: clamp(84px, 8vw, 120px); aspect-ratio: 1; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; }
+.loader__badge svg { width: 100%; height: 100%; animation: spin 1.4s linear infinite; }
+.loader__badge text { font-family: var(--f-display); font-weight: 800; font-size: 11.4px; letter-spacing: .16em; text-transform: uppercase; fill: currentColor; }
+.loader__badge b { position: absolute; font-size: clamp(1.1rem, 1.8vw, 1.6rem); }
+body.is-loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; animation: none; }
 
+/* Page-in: a subtle fade + rise for the main content once the loader clears.
+   Gated behind scripting support like .rv — if unsupported, content just
+   appears immediately with no animation, which is a harmless degradation
+   (unlike .loader above, this never affects layout). */
+@media (scripting: enabled) {
   main, footer { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); animation: rv-safety .01s 3s forwards; }
   body.is-loaded main, body.is-loaded footer { opacity: 1; transform: none; animation: none; }
 }
 
 /* Scroll reveal.
    Elements start hidden ONLY when scripting is on, so a visitor without JavaScript sees everything.
-   scripts/reveal.js adds .is-in as they scroll into view. If that script ever fails, rv-safety
-   reveals the content after 3 seconds anyway, so nothing can stay hidden. */
+   scripts/reveal.js toggles .is-in as each element enters/leaves the viewport, so the rise-in
+   replays every time — no CSS timer fallback here (that would fight the repeat toggling); if
+   reveal.js's setup ever throws, its own catch block force-reveals everything instead. */
 @media (scripting: enabled) {
-  .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); animation: rv-safety .01s 3s forwards; }
-  .rv.is-in { opacity: 1; transform: none; animation: none; }
+  .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+  .rv.is-in { opacity: 1; transform: none; }
   /* hero name: each line slides up out of a mask */
   .hero__name span { overflow: hidden; padding: .09em 0 .03em; margin: -.09em 0 -.03em; }
   .hero__name span > i { display: block; font-style: normal; transform: translateY(105%); transition: transform 1.1s var(--ease); animation: rv-safety .01s 3s forwards; }
   .hero.is-in .hero__name span > i { transform: none; animation: none; }
   .hero.is-in .hero__name span:last-child > i { transition-delay: .12s; }
+
+  /* Staggered cards: rows/cards rendered from a data loop (so there's no
+     per-item class to hand-edit) get a small cascading delay from their
+     position in the grid instead — same subtle .rv motion, just offset a
+     touch per column/row so a group doesn't all pop in at once. */
+  .rows .row:nth-child(5n+2), .quotes__rail .quote:nth-child(3n+2) { --d: .1s; }
+  .rows .row:nth-child(5n+3), .quotes__rail .quote:nth-child(3n) { --d: .2s; }
+  .rows .row:nth-child(5n+4), .grid .card:nth-child(2n) { --d: .2s; }
+  .rows .row:nth-child(5n) { --d: .3s; }
+  .posts .post-card:nth-child(3n+2) { --d: .1s; }
+  .posts .post-card:nth-child(3n) { --d: .2s; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -71,12 +71,17 @@ const revealEls = $$(".rv");
 if (reduceMotion || !("IntersectionObserver" in window)) {
   revealEls.forEach((el) => el.classList.add("is-in"));
 } else {
+  // Toggles (not just adds) is-in, so a section replays its rise-in animation
+  // every time it scrolls into view — leaving and coming back re-triggers it.
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
+    entries.forEach((en) => en.target.classList.toggle("is-in", en.isIntersecting));
   }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
   revealEls.forEach((el) => io.observe(el));
 }
-} catch (e) { if (window.console) console.error("[reveal.js]", e); }
+} catch (e) {
+  if (window.console) console.error("[reveal.js]", e);
+  $$(".rv").forEach((el) => el.classList.add("is-in")); // fail-safe: never leave everything hidden if the observer itself threw
+}
 
 /* counters.js */
 try {
@@ -99,22 +104,6 @@ $$("[data-count]").forEach((el) => {
   io.observe(el);
 });
 } catch (e) { if (window.console) console.error("[counters.js]", e); }
-
-/* clock.js */
-try {
-/* Footer local-time line: <span data-clock data-tz="Africa/Lagos" data-place="Ile-Ife, Nigeria"> */
-$$("[data-clock]").forEach((el) => {
-  const tz = el.dataset.tz, place = el.dataset.place || "";
-  const tick = () => {
-    try {
-      const t = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: tz }).format(new Date());
-      el.textContent = place + " · " + t + " local time";
-    } catch (e) { el.textContent = place; }
-  };
-  tick();
-  setInterval(tick, 30000);
-});
-} catch (e) { if (window.console) console.error("[clock.js]", e); }
 
 /* project-peek.js */
 try {

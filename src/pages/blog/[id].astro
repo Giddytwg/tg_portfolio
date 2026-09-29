@@ -59,8 +59,8 @@ function cardProps(p: (typeof posts)[number]) {
 
 <section class="sheet">
   <div class="article">
-    <div class="prose"><Content /></div>
-    <aside class="toc" aria-label="Article tools">
+    <div class="prose rv rv--d2"><Content /></div>
+    <aside class="toc rv rv--d3" aria-label="Article tools">
       {toc.length > 0 && (
         <div><p class="toc__title">On this page</p><ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol></div>
       )}
@@ -75,7 +75,7 @@ function cardProps(p: (typeof posts)[number]) {
 
 <section class="related">
   <div class="wrap">
-    <div class="section-dark__head related__head"><div class="stack stack--md"><span class="eyebrow">Keep reading</span><h2 class="display h2">More posts</h2></div><a class="btn btn--ghost btn--sm" href="/blog">All posts <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a></div>
+    <div class="section-dark__head related__head"><div class="stack stack--md"><span class="eyebrow rv">Keep reading</span><h2 class="display h2 rv rv--d1">More posts</h2></div><a class="btn btn--ghost btn--sm rv rv--d2" href="/blog">All posts <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a></div>
     <div class="posts posts--related" id="relatedGrid">
       {related.map((p) => <PostCard {...cardProps(p)} />)}
     </div>

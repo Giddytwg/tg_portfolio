@@ -61,8 +61,8 @@ const ogImage = `${SITE_URL}/assets/images/og-image.png`;
 </header>
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true" inert>
   <nav class="menu__list" aria-label="Main">
-    {NAV_LINKS.map((l, i) => (
-      <a class="menu__link" href={l.href} aria-current={path === l.href ? "page" : undefined}><small>{String(i + 1).padStart(2, "0")}</small>{l.label}</a>
+    {NAV_LINKS.map((l) => (
+      <a class="menu__link" href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</a>
     ))}
   </nav>
   <div class="menu__foot">
@@ -91,7 +91,7 @@ const ogImage = `${SITE_URL}/assets/images/og-image.png`;
     </div>
   </section>
   <div class="foot">
-    <div>&copy; 2026 Tope Gideon<span class="foot__time" data-clock data-tz="Africa/Lagos" data-place="Ile-Ife, Nigeria">Ile-Ife, Nigeria</span></div>
+    <div>&copy; 2026 Tope Gideon<span class="foot__time">Ibadan, Nigeria</span></div>
     <nav class="foot__nav" aria-label="Footer">
       {FOOTER_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>

@@ -2,10 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
 import { EMAIL, UPWORK_URL, LINKEDIN_URL, GITHUB_URL, X_URL } from "../lib/site";
+const [emailUser, emailDomain] = EMAIL.split("@"); // <wbr> below gives it a clean wrap point instead of splitting mid-word
 ---
 <Layout
   title="Start a Webflow Project | Tope Gideon"
-  description="Start a Webflow project or request a call with Tope Gideon. Tell me what you need, your budget and timeline, and get a reply within 24 hours."
+  description="Start a Webflow project or request a call with Tope Gideon. Tell me what you need and get a reply within 24 hours."
   path="/contact"
   dataPage="contact"
   jsonLd={[{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
@@ -25,8 +26,8 @@ import { EMAIL, UPWORK_URL, LINKEDIN_URL, GITHUB_URL, X_URL } from "../lib/site"
   <div class="contact">
     <div>
     <form class="form" id="contactForm" action={`mailto:${EMAIL}`} method="post" enctype="text/plain">
-      <h2 class="form-title" id="formT">Tell me about your project</h2>
-      <p class="form-sub">Takes about two minutes. Only name, email and a short message are required.</p>
+      <h2 class="form-title rv" id="formT">Tell me about your project</h2>
+      <p class="form-sub rv rv--d1">Takes about two minutes. Only name, email and a short message are required.</p>
 
       <div class="field--row">
         <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required></div>
@@ -37,13 +38,6 @@ import { EMAIL, UPWORK_URL, LINKEDIN_URL, GITHUB_URL, X_URL } from "../lib/site"
         <div class="field"><label for="type">What do you need?</label>
           <select id="type" name="type"><option>Figma to Webflow</option><option>Webflow website or landing page</option><option>WordPress to Webflow migration</option><option>Technical SEO &amp; speed</option><option>Memberships, integrations or automation</option><option>Ongoing Webflow support</option><option>Something else</option></select></div>
         <div class="field"><label for="website">Current website <span class="field__opt">(optional)</span></label><input id="website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="https://"></div>
-      </div>
-
-      <div class="field--row">
-        <div class="field"><label for="budget">Budget <span class="field__opt">(optional)</span></label>
-          <select id="budget" name="budget"><option value="">Not sure yet</option><option>Under $500</option><option>$500 – $1,500</option><option>$1,500 – $5,000</option><option>$5,000+</option></select></div>
-        <div class="field"><label for="timeframe">Timeline <span class="field__opt">(optional)</span></label>
-          <select id="timeframe" name="timeline"><option value="">Flexible</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within a month</option><option>In 1–3 months</option></select></div>
       </div>
 
       <div class="field"><label for="message">What are you building?</label><textarea id="message" name="message" placeholder="Goals, pages, links to your Figma file or references…" required></textarea></div>
@@ -81,10 +75,10 @@ import { EMAIL, UPWORK_URL, LINKEDIN_URL, GITHUB_URL, X_URL } from "../lib/site"
     </div>
   </div>
     <aside class="aside" aria-label="Other ways to reach me">
-      <div class="aside__card">
+      <div class="aside__card rv rv--d2">
         <span class="eyebrow">Email</span>
-        <a class="aside__mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        <p class="lead">Open to remote work, long-term partnerships and contract-to-hire. Based in Ile-Ife, Nigeria (WAT, UTC+1).</p>
+        <a class="aside__mail" href={`mailto:${EMAIL}`}>{emailUser}@<wbr />{emailDomain}</a>
+        <p class="lead">Open to remote work, long-term partnerships and contract-to-hire. Based in Ibadan, Nigeria (WAT, UTC+1).</p>
         <div><button class="btn btn--sm" type="button" id="copyMail" data-email={EMAIL}>Copy email</button></div>
       </div>
       <nav class="aside__list" aria-label="Profiles">

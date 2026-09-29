@@ -61,9 +61,10 @@ blockquote { margin: 0; }
 /* visually hidden but available to screen readers */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* scroll-reveal stagger (used with .rv) */
+/* scroll-reveal stagger (used with .rv) — even steps so a row of cards
+   visibly cascades in one after another instead of all at once. */
 .rv--d0 { --d: 0s; }
-.rv--d1 { --d: .06s; }
-.rv--d2 { --d: .08s; }
-.rv--d3 { --d: .12s; }
-.rv--d4 { --d: .16s; }
+.rv--d1 { --d: .1s; }
+.rv--d2 { --d: .2s; }
+.rv--d3 { --d: .3s; }
+.rv--d4 { --d: .4s; }

@@ -1,8 +1,9 @@
 ---
 // Full-page loading spinner shown on every page while it loads, reusing the
 // same rotating circular badge as the hero portrait — just faster and centered.
-// Only ever appears with JavaScript on (see the "@media (scripting: enabled)"
-// rule in animations.css) and clears itself in public/js/main.js (page-loader.js).
+// public/js/main.js (page-loader.js) clears it once the page has loaded; the
+// <noscript> below covers visitors with JavaScript off entirely, since with
+// no script to add body.is-loaded, nothing else would ever hide it.
 ---
 <div class="loader" role="status" aria-live="polite">
   <div class="loader__badge">
@@ -11,3 +12,4 @@
   </div>
   <span class="sr-only">Loading</span>
 </div>
+<noscript><style>.loader { display: none; }</style></noscript>

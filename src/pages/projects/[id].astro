@@ -37,13 +37,13 @@ const url = `${SITE_URL}${projectUrl(project.id)}`;
 </section>
 
 <div class="wrap">
-  <dl class="pd__meta">
+  <dl class="pd__meta rv rv--d2">
     <div><dt>Type</dt><dd>{category} build</dd></div>
     <div><dt>Built with</dt><dd>{stackLabel(stack)}</dd></div>
     <div><dt>Role</dt><dd>Design &amp; development</dd></div>
   </dl>
-  <figure class="pd__shot rv"><img src={image} srcset={`${thumb} 700w, ${image} 1400w`} sizes="(max-width: 1440px) 92vw, 1360px" alt={`Screenshot of ${name}`} width="1400" height="700" decoding="async" fetchpriority="high"></figure>
-  <nav class="pd__nav" aria-label="More projects">
+  <figure class="pd__shot rv rv--d3"><img src={image} srcset={`${thumb} 700w, ${image} 1400w`} sizes="(max-width: 1440px) 92vw, 1360px" alt={`Screenshot of ${name}`} width="1400" height="700" decoding="async" fetchpriority="high"></figure>
+  <nav class="pd__nav rv rv--d4" aria-label="More projects">
     <a href={projectUrl(prev.id)}><small>&larr; Previous</small><b>{prev.data.name}</b></a>
     <a href={projectUrl(next.id)}><small>Next &rarr;</small><b>{next.data.name}</b></a>
   </nav>

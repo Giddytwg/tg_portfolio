@@ -38,11 +38,8 @@
 .tl__item h3 { font-size: clamp(1.1rem, 1.8vw, 1.5rem); }
 .tl__where { color: var(--paper-ink); font-weight: 700; font-size: .95rem; margin-top: 4px; }
 .tl__item p:last-child { color: var(--paper-dim); max-width: 54ch; margin-top: 8px; }
-.creds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: clamp(22px, 3vw, 36px); }
+.creds { margin-top: clamp(22px, 3vw, 36px); }
 .creds__t { font-family: var(--f-display); font-stretch: 112%; font-weight: 700; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--paper-dim); margin-bottom: 10px; }
-@media (max-width: 960px) {
-  .creds { grid-template-columns: 1fr; }
-}
 @media (max-width: 640px) {
   .tl__item { grid-template-columns: 1fr; }
 }
@@ -84,7 +81,7 @@
 .aside { display: grid; gap: 26px; }
 .aside__card { background: var(--paper-ink); color: var(--paper); border-radius: 22px; padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; }
 .aside__card .lead { color: rgba(242, 241, 236, .65); }
-.aside__mail { font-family: var(--f-display); font-stretch: 118%; font-weight: 800; font-size: clamp(1.05rem, 1.8vw, 1.5rem); letter-spacing: -.01em; word-break: break-all; }
+.aside__mail { font-family: var(--f-display); font-stretch: 118%; font-weight: 800; font-size: clamp(1.05rem, 1.8vw, 1.5rem); letter-spacing: -.01em; overflow-wrap: anywhere; }
 .aside__mail:hover { color: var(--accent); }
 .aside__list { display: grid; }
 .aside__list a { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--paper-line); font-family: var(--f-display); font-stretch: 112%; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .82rem; transition: padding .35s var(--ease); }

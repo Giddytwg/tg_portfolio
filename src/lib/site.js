@@ -5,7 +5,7 @@ export const EMAIL = "topeoyenpemi@gmail.com";
 export const UPWORK_URL = "https://www.upwork.com/freelancers/~01ac39886cec06e248?viewMode=1";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/tope-oyenpemi-2a3470245";
 export const GITHUB_URL = "https://github.com/Giddytwg";
-export const X_URL = "https://x.com/TopeGideon_";
+export const X_URL = "https://x.com/tg_webflow";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
