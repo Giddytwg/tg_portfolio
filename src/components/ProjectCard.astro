@@ -1,0 +1,17 @@
+---
+// The grid card on /projects.
+import { projectUrl, projectImage, projectThumb, stackLabel } from "../lib/content";
+
+interface Props { project: { id: string; data: { name: string; category: string; stack: string[] } } }
+const { project } = Astro.props;
+const { name, category, stack } = project.data;
+const image = projectImage(project.id), thumb = projectThumb(project.id);
+---
+<a class="card rv" href={projectUrl(project.id)} data-cat={category}>
+  <div class="card__img">
+    <img src={thumb} srcset={`${thumb} 700w, ${image} 1400w`} sizes="(max-width: 767px) 92vw, 46vw" alt={`Screenshot of ${name}`} width="1400" height="700" loading="lazy" decoding="async">
+    <span class="card__tag">{category}</span>
+  </div>
+  <div class="card__meta"><h3>{name}</h3><span class="row__go"><svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span></div>
+  <p class="card__stack">{stackLabel(stack)}</p>
+</a>

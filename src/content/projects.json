@@ -1,0 +1,58 @@
+[
+  {
+    "id": "swiss-belhotel",
+    "name": "Swiss-Belhotel International",
+    "category": "Webflow",
+    "stack": ["Webflow", "CMS"],
+    "overview": "The online presence of Swiss-Belhotel International, a hospitality group showcasing its hotels and services.",
+    "link": "https://swiss-belhotel-international.webflow.io/"
+  },
+  {
+    "id": "just-home",
+    "name": "Just Home by Giditals",
+    "category": "Webflow",
+    "stack": ["Webflow", "CMS"],
+    "overview": "A modern real estate platform for browsing homes across U.S. cities.",
+    "link": "https://just-home-by-giditals.webflow.io/"
+  },
+  {
+    "id": "crypton",
+    "name": "Crypton",
+    "category": "Webflow",
+    "stack": ["Webflow", "Interactions"],
+    "overview": "A modern platform for trading and managing cryptocurrencies.",
+    "link": "https://crypton-crypt.webflow.io/"
+  },
+  {
+    "id": "figma-store-clone",
+    "name": "Figma Store Clone",
+    "category": "React",
+    "stack": ["React", "TypeScript", "Tailwind", "Vite", "Vercel"],
+    "overview": "A pixel-perfect Figma Store clone with a product grid, filters and a fully responsive layout.",
+    "link": "https://figma-store-clone-v0.vercel.app/"
+  },
+  {
+    "id": "easy-care",
+    "name": "Easy Care Losk",
+    "category": "React",
+    "stack": ["React", "Tailwind", "Vercel"],
+    "overview": "A clean, responsive platform that connects users with trusted health professionals.",
+    "link": "https://easy-care-losk.vercel.app/"
+  },
+  {
+    "id": "gleamy-creatives",
+    "name": "Gleamy Creatives",
+    "category": "Webflow",
+    "stack": ["Webflow"],
+    "overview": "A creative agency site built around design, branding and digital services.",
+    "link": "https://gleamy-creatives.webflow.io/"
+  },
+  {
+    "id": "minders-web",
+    "name": "Minders Web",
+    "category": "Webflow",
+    "stack": ["Webflow"],
+    "overview": "A clean, conversion-minded marketing site for a digital services business.",
+    "link": "https://mindersweb.webflow.io/"
+  }
+]

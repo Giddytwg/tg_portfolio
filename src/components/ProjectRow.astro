@@ -1,0 +1,13 @@
+---
+// The compact "Recent projects" list on the home page.
+import { projectUrl, projectThumb } from "../lib/content";
+
+interface Props { project: { id: string; data: { name: string; category: string } }; n: string }
+const { project, n } = Astro.props;
+---
+<a class="row rv" href={projectUrl(project.id)} data-img={projectThumb(project.id)} aria-label={`${project.data.name} — ${project.data.category} project`}>
+  <span class="row__n">{n}</span>
+  <span class="row__name">{project.data.name}</span>
+  <span class="row__cat">{project.data.category}</span>
+  <span class="row__go"><svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span>
+</a>

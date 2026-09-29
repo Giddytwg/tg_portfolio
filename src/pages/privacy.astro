@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { EMAIL, UPWORK_URL } from "../lib/site";
+---
+<Layout
+  title="Privacy Policy | Tope Gideon"
+  description="How this website handles your information: the project request form, analytics cookies and third-party services."
+  path="/privacy"
+  dataPage="privacy"
+  jsonLd={[{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://topegideon.vercel.app/" },
+    { "@type": "ListItem", position: 2, name: "Privacy", item: "https://topegideon.vercel.app/privacy" },
+  ] }]}
+>
+<section class="page-hero" aria-labelledby="pT">
+  <div class="page-hero__inner">
+    <span class="eyebrow rv">Legal</span>
+    <h1 class="display page-hero__title rv rv--d1" id="pT">Privacy</h1>
+    <p class="lead rv rv--d3">Plain-language summary of what this website does with your information. Last updated September 2026.</p>
+  </div>
+</section>
+
+<section class="sheet" aria-label="Privacy policy"><div class="prose-page">
+  <h2>Who I am</h2>
+  <p>This website is run by Tope Gideon, a freelance Webflow developer and designer based in Ile-Ife, Nigeria. You can contact me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a> about anything on this page.</p>
+  <h2>The project request form</h2>
+  <p>If you use the &ldquo;Start a project&rdquo; form, I receive what you type: your name, email address, project details, and optionally your website, budget, timeline and (if you ask for a call) your preferred day, time window and time zone. I use this only to reply to you, quote for the work and arrange a call if you asked for one.</p>
+  <p>Depending on how the site is set up, the form is either sent through a form service or opens your email app so that you send the message yourself. I do not sell your details or add you to a mailing list.</p>
+  <h2>Analytics and cookies</h2>
+  <ul>
+    <li>Analytics are <strong>off by default</strong>. If analytics are enabled on this site, a banner asks for your consent first, and Google Analytics only loads if you choose Accept.</li>
+    <li>Your Accept or Decline choice is stored in your browser (local storage) so I don't ask again. Clearing your browser data resets it.</li>
+    <li>If you accept, Google Analytics records anonymous usage such as pages viewed and clicks on buttons like &ldquo;Start a project&rdquo;.</li>
+  </ul>
+  <h2>Third-party services</h2>
+  <ul>
+    <li><strong>Fonts</strong> are hosted on this site itself, so no font provider receives your IP address.</li>
+    <li><strong>Upwork, LinkedIn, GitHub and X</strong> links take you to those sites, which have their own privacy policies.</li>
+    <li><strong>Project links</strong> open live client or demo sites that I don't control.</li>
+  </ul>
+  <h2>How long I keep things</h2>
+  <p>I keep inquiries for as long as needed to handle your request and for a reasonable period afterwards in case you get back in touch, then delete them.</p>
+  <h2>Your choices</h2>
+  <p>You can ask me to see, correct or delete the information you sent me by emailing <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
+</div></section>
+</Layout>

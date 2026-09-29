@@ -1,0 +1,31 @@
+---
+// Used on the home page, the blog list and "related posts". Pass `featured` for the big feature layout.
+import { postUrl } from "../lib/content";
+
+interface Props {
+  post: { id: string; data: { title: string; excerpt: string; category: string } };
+  dateLabel: string;
+  minutes: number;
+  numberLabel: string;
+  coverVariant: number;
+  featured?: boolean;
+}
+const { post, dateLabel, minutes, numberLabel, coverVariant, featured = false } = Astro.props;
+const { title, excerpt, category } = post.data;
+const metaBits = [featured ? "Latest" : null, dateLabel, `${minutes} min read`].filter(Boolean);
+---
+{featured ? (
+  <a class="post-card rv post-feature" href={postUrl(post.id)} data-cat={category}>
+    <div class={`cover cover--${coverVariant}`}><span class="cover__cat">{category}</span><span class="cover__num" aria-hidden="true">{numberLabel}</span></div>
+    <div class="stack stack--sm">
+      <div class="post-card__meta">{metaBits.map((s) => <span>{s}</span>)}</div>
+      <h3>{title}</h3><p>{excerpt}</p>
+    </div>
+  </a>
+) : (
+  <a class="post-card rv" href={postUrl(post.id)} data-cat={category}>
+    <div class={`cover cover--${coverVariant}`}><span class="cover__cat">{category}</span><span class="cover__num" aria-hidden="true">{numberLabel}</span></div>
+    <div class="post-card__meta">{metaBits.map((s) => <span>{s}</span>)}</div>
+    <h3>{title}</h3><p>{excerpt}</p>
+  </a>
+)}

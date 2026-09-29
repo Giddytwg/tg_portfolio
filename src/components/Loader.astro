@@ -1,0 +1,13 @@
+---
+// Full-page loading spinner shown on every page while it loads, reusing the
+// same rotating circular badge as the hero portrait — just faster and centered.
+// Only ever appears with JavaScript on (see the "@media (scripting: enabled)"
+// rule in animations.css) and clears itself in public/js/main.js (page-loader.js).
+---
+<div class="loader" role="status" aria-live="polite">
+  <div class="loader__badge">
+    <svg viewBox="0 0 100 100"><defs><path id="loaderCirc" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><text><textPath href="#loaderCirc" textLength="230">Loading • One sec •</textPath></text></svg>
+    <b>✦</b>
+  </div>
+  <span class="sr-only">Loading</span>
+</div>

@@ -1,0 +1,114 @@
+---
+import { SITE_URL, EMAIL, UPWORK_URL, LINKEDIN_URL, GITHUB_URL, X_URL, NAV_LINKS, FOOTER_LINKS } from "../lib/site";
+import Loader from "../components/Loader.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;           // canonical path, e.g. "/", "/about", "/projects/crypton"
+  ogType?: "website" | "article";
+  stickyCta?: boolean;    // adds the "has-sticky" body class + the mobile sticky-cta bar
+  jsonLd?: object[];      // extra JSON-LD blocks (BreadcrumbList, Article…)
+  preloadImage?: string;  // an above-the-fold image to preload (home page portrait)
+  dataPage: string;       // matches body[data-page] read by public/js/main.js
+  noindex?: boolean;      // adds <meta name="robots" content="noindex"> (the 404 page)
+}
+
+const { title, description, path, ogType = "website", stickyCta = false, jsonLd = [], preloadImage, dataPage, noindex = false } = Astro.props;
+const canonical = `${SITE_URL}${path}`;
+const ogImage = `${SITE_URL}/assets/images/og-image.png`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#0c0d10">
+  {noindex && <meta name="robots" content="noindex">}
+  <link rel="canonical" href={canonical}>
+  <meta property="og:site_name" content="Tope Gideon">
+  <meta property="og:type" content={ogType}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  {preloadImage && <link rel="preload" href={preloadImage} as="image" fetchpriority="high">}
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+</head>
+<body data-page={dataPage} data-email={EMAIL} class={stickyCta ? "has-sticky" : ""}>
+<Loader />
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="nav__brand" href="/" aria-label="Tope Gideon — home">Tope Gideon <i>&copy;</i></a>
+  <div class="nav__right">
+    <a class="btn btn--sm nav__cta" href="/contact#request"><span class="nav__cta-long">Start a project</span><span class="nav__cta-short">Start</span> <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+    <button class="nav__menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true" inert>
+  <nav class="menu__list" aria-label="Main">
+    {NAV_LINKS.map((l, i) => (
+      <a class="menu__link" href={l.href} aria-current={path === l.href ? "page" : undefined}><small>{String(i + 1).padStart(2, "0")}</small>{l.label}</a>
+    ))}
+  </nav>
+  <div class="menu__foot">
+    <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    <div class="menu__soc">
+      <a href={UPWORK_URL} target="_blank" rel="noopener">Upwork</a>
+      <a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+      <a href={X_URL} target="_blank" rel="noopener">X</a>
+    </div>
+  </div>
+  <a class="btn menu__cta" href="/contact#request">Start a project <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+</div>
+<main id="main">
+<slot />
+</main>
+<footer>
+  <section class="cta" aria-labelledby="ctaT">
+    <div class="cta__inner">
+      <span class="eyebrow rv">Have a project in mind?</span>
+      <h2 class="display cta__title rv rv--d2" id="ctaT">Let&rsquo;s build a site that <em>converts.</em></h2>
+      <div class="cta__row rv rv--d4">
+        <a class="btn" href="/contact#request">Start a project <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+        <a class="btn btn--ghost" href={UPWORK_URL} target="_blank" rel="noopener">Or hire me on Upwork <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+      </div>
+    </div>
+  </section>
+  <div class="foot">
+    <div>&copy; 2026 Tope Gideon<span class="foot__time" data-clock data-tz="Africa/Lagos" data-place="Ile-Ife, Nigeria">Ile-Ife, Nigeria</span></div>
+    <nav class="foot__nav" aria-label="Footer">
+      {FOOTER_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="foot__soc">
+      <a class="foot__mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+      <a href={X_URL} target="_blank" rel="noopener">X</a>
+    </div>
+  </div>
+</footer>
+{stickyCta && (
+  <div class="sticky-cta" role="region" aria-label="Start a project">
+    <a class="btn" href="/contact#request">Start a project <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+    <a class="btn btn--ghost" href={UPWORK_URL} target="_blank" rel="noopener">Upwork</a>
+  </div>
+)}
+<script src="/js/main.js" defer></script>
+</body>
+</html>

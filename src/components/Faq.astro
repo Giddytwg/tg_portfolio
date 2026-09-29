@@ -1,0 +1,27 @@
+---
+// Identical on the Home and Contact pages — edit the Q&A here and both pick it up.
+const items = [
+  { q: "Can you migrate my WordPress site without losing rankings?", a: "Yes. I map every old URL to its new one with 301 redirects, carry over titles, meta descriptions and headings, rebuild the sitemap and check the result in Google Search Console, so the move doesn't cost you rankings or traffic." },
+  { q: "Do you build from my Figma file?", a: "Yes, pixel-perfect and fully responsive. I can also work from an HTML/CSS reference or a brief and references, and shape the layout with you before building." },
+  { q: "How long does a typical project take?", a: "It depends on scope. A focused Figma-to-Webflow build can be as quick as a few days, a marketing site usually takes one to three weeks, and larger CMS-driven or membership builds take longer. You get a firm timeline before I start." },
+  { q: "Will I be able to edit the site myself?", a: "Yes. I use a clean Client-First class structure and set up the Webflow CMS and Editor around your content, then walk you through it, so routine updates never need a developer." },
+  { q: "Do you offer ongoing support?", a: "Yes. Many clients keep me on as their long-term Webflow partner for updates, new pages, integrations and performance work, and I'm open to contract-to-hire arrangements." },
+  { q: "How do we get started?", a: "Send me a message here or invite me on Upwork. Tell me what you're building and when you need it, and I'll reply with next steps." },
+];
+---
+<section class="sheet" aria-labelledby="faqT">
+  <div class="split">
+    <div class="split__side">
+      <span class="eyebrow">Questions</span>
+      <h2 class="display h2" id="faqT">Common questions</h2>
+    </div>
+    <div class="faq" id="faq">
+      {items.map((item, i) => (
+        <details>
+          <summary><span class="row__n">{String(i + 1).padStart(2, "0")}</span><h3>{item.q}</h3><span class="faq__plus" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>{item.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Faq from "../components/Faq.astro";
+import { EMAIL, UPWORK_URL, LINKEDIN_URL, GITHUB_URL, X_URL } from "../lib/site";
+---
+<Layout
+  title="Start a Webflow Project | Tope Gideon"
+  description="Start a Webflow project or request a call with Tope Gideon. Tell me what you need, your budget and timeline, and get a reply within 24 hours."
+  path="/contact"
+  dataPage="contact"
+  jsonLd={[{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://topegideon.vercel.app/" },
+    { "@type": "ListItem", position: 2, name: "Contact", item: "https://topegideon.vercel.app/contact" },
+  ] }]}
+>
+<section class="page-hero page-hero--compact" aria-labelledby="pT">
+  <div class="page-hero__inner">
+    <span class="eyebrow rv">Reply within 24 hours</span>
+    <h1 class="display page-hero__title rv rv--d1" id="pT">Start a project</h1>
+    <p class="lead rv rv--d3">Fill in the short form and I'll reply within 24 hours. Prefer to talk first? Choose &ldquo;Book a call&rdquo; and tell me when suits you.</p>
+  </div>
+</section>
+
+<section class="sheet" id="request" aria-labelledby="formT">
+  <div class="contact">
+    <div>
+    <form class="form" id="contactForm" action={`mailto:${EMAIL}`} method="post" enctype="text/plain">
+      <h2 class="form-title" id="formT">Tell me about your project</h2>
+      <p class="form-sub">Takes about two minutes. Only name, email and a short message are required.</p>
+
+      <div class="field--row">
+        <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required></div>
+        <div class="field"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="jane@company.com" required></div>
+      </div>
+
+      <div class="field--row">
+        <div class="field"><label for="type">What do you need?</label>
+          <select id="type" name="type"><option>Figma to Webflow</option><option>Webflow website or landing page</option><option>WordPress to Webflow migration</option><option>Technical SEO &amp; speed</option><option>Memberships, integrations or automation</option><option>Ongoing Webflow support</option><option>Something else</option></select></div>
+        <div class="field"><label for="website">Current website <span class="field__opt">(optional)</span></label><input id="website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="https://"></div>
+      </div>
+
+      <div class="field--row">
+        <div class="field"><label for="budget">Budget <span class="field__opt">(optional)</span></label>
+          <select id="budget" name="budget"><option value="">Not sure yet</option><option>Under $500</option><option>$500 – $1,500</option><option>$1,500 – $5,000</option><option>$5,000+</option></select></div>
+        <div class="field"><label for="timeframe">Timeline <span class="field__opt">(optional)</span></label>
+          <select id="timeframe" name="timeline"><option value="">Flexible</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within a month</option><option>In 1–3 months</option></select></div>
+      </div>
+
+      <div class="field"><label for="message">What are you building?</label><textarea id="message" name="message" placeholder="Goals, pages, links to your Figma file or references…" required></textarea></div>
+
+      <fieldset class="choice">
+        <legend>How should I get back to you?</legend>
+        <label><input type="radio" name="reply" value="email" checked><span>By email</span></label>
+        <label><input type="radio" name="reply" value="call"><span>Book a call</span></label>
+      </fieldset>
+
+      <div class="call-fields" id="callFields" hidden>
+        <div class="field--row">
+          <div class="field"><label for="callDay">Preferred day</label><input id="callDay" name="call_day" type="date"></div>
+          <div class="field"><label for="callTime">Preferred time (your time zone)</label>
+            <select id="callTime" name="call_time"><option>Morning (9am – 12pm)</option><option>Afternoon (12pm – 5pm)</option><option>Evening (5pm – 8pm)</option></select></div>
+        </div>
+        <input type="hidden" id="tz" name="tz">
+        <p class="call-note">I'm based in Nigeria (WAT, UTC+1). I'll confirm a time that works for both of us by email.</p>
+      </div>
+
+      <input type="hidden" name="_subject" value="New project request">
+      <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="form__actions">
+        <button class="btn btn--dark" type="submit"><span id="submitLabel">Send project request</span> <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></button>
+      </div>
+      <p class="form__status" id="formStatus" role="status"></p>
+      <p class="form__alt">Prefer Upwork? <a href={UPWORK_URL} target="_blank" rel="noopener">Send me an invite there</a> instead.</p>
+    </form>
+
+    <div class="form__done" id="formDone" role="status" hidden>
+      <h3>Request received</h3>
+      <p>Thanks! I'll reply to your email within 24 hours. If you asked for a call, I'll confirm a time then.</p>
+      <div><a class="btn btn--sm" href="/projects">See my work <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a></div>
+    </div>
+  </div>
+    <aside class="aside" aria-label="Other ways to reach me">
+      <div class="aside__card">
+        <span class="eyebrow">Email</span>
+        <a class="aside__mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <p class="lead">Open to remote work, long-term partnerships and contract-to-hire. Based in Ile-Ife, Nigeria (WAT, UTC+1).</p>
+        <div><button class="btn btn--sm" type="button" id="copyMail" data-email={EMAIL}>Copy email</button></div>
+      </div>
+      <nav class="aside__list" aria-label="Profiles">
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn<svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+        <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub<svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+        <a href={X_URL} target="_blank" rel="noopener">X / Twitter<svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+        <a href={UPWORK_URL} target="_blank" rel="noopener">Or hire me on Upwork<svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+      </nav>
+    </aside>
+  </div>
+</section>
+
+<Faq />
+</Layout>

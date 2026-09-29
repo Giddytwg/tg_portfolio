@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { projectUrl, projectImage, projectThumb, stackLabel, projectNeighbours } from "../../lib/content";
+import { SITE_URL } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({ params: { id: project.id }, props: { project, projects } }));
+}
+
+const { project, projects } = Astro.props;
+const { name, category, stack, overview, link } = project.data;
+const { prev, next } = projectNeighbours(projects, project.id);
+const image = projectImage(project.id), thumb = projectThumb(project.id);
+const url = `${SITE_URL}${projectUrl(project.id)}`;
+---
+<Layout
+  title={`${name} — ${category} project | Tope Gideon`}
+  description={overview}
+  path={projectUrl(project.id)}
+  dataPage="projects"
+  stickyCta
+  ogType="article"
+  jsonLd={[{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects` },
+    { "@type": "ListItem", position: 3, name: name, item: url },
+  ] }]}
+>
+<section class="page-hero" aria-labelledby="pT">
+  <div class="page-hero__inner">
+    <a class="eyebrow" href="/projects">&larr; All projects</a>
+    <h1 class="display page-hero__title pd__title rv rv--d1" id="pT">{name}</h1>
+    <div class="page-hero__row rv rv--d3"><p class="lead">{overview}</p><a class="btn" href={link} target="_blank" rel="noopener">View live project <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <dl class="pd__meta">
+    <div><dt>Type</dt><dd>{category} build</dd></div>
+    <div><dt>Built with</dt><dd>{stackLabel(stack)}</dd></div>
+    <div><dt>Role</dt><dd>Design &amp; development</dd></div>
+  </dl>
+  <figure class="pd__shot rv"><img src={image} srcset={`${thumb} 700w, ${image} 1400w`} sizes="(max-width: 1440px) 92vw, 1360px" alt={`Screenshot of ${name}`} width="1400" height="700" decoding="async" fetchpriority="high"></figure>
+  <nav class="pd__nav" aria-label="More projects">
+    <a href={projectUrl(prev.id)}><small>&larr; Previous</small><b>{prev.data.name}</b></a>
+    <a href={projectUrl(next.id)}><small>Next &rarr;</small><b>{next.data.name}</b></a>
+  </nav>
+</div>
+</Layout>
