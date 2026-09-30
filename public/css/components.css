@@ -55,7 +55,7 @@
 .menu__soc a { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Home hero */
-.hero { position: relative; min-height: 100svh; padding-top: calc(var(--nav-h) + 6px); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; isolation: isolate; }
+.hero { position: relative; min-height: 100vh; min-height: 100svh; padding-top: calc(var(--nav-h) + 6px); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; isolation: isolate; }
 .hero__glow { position: absolute; z-index: -1; inset: 8% 10% auto 10%; height: 55%; background: radial-gradient(closest-side, rgba(142, 245, 83, .16), transparent 70%); filter: blur(30px); pointer-events: none; }
 .hero__foot { max-width: var(--maxw); margin-inline: auto; width: 100%; padding: clamp(22px, 3vw, 40px) var(--gutter) clamp(34px, 5vw, 64px); display: grid; grid-template-columns: 1fr auto; gap: 24px 40px; align-items: end; }
 .hero__intro { display: grid; gap: 22px; max-width: 52ch; }
@@ -92,15 +92,13 @@
   .hero__foot { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .hero__stage { grid-template-columns: 1fr; gap: 14px; }
+  .hero__stage { grid-template-columns: 1fr; align-items: start; gap: 14px; }
   .hero__media { order: -1; width: 34vw; justify-self: end; margin-bottom: 4px; }
   .hero__badge { width: 22vw; transform: translate(-46%, 30%); }
   .hero__name span { font-size: 18.4vw; }
   .hero__title { font-size: 1.4rem; }
   .hero__cta .btn { flex: 1 1 auto; }
 }
-/* the name lines use <i> only as an animation hook: never italic, even without JavaScript */
-.hero__name i { display: block; font-style: normal; }
 
 /* Paper 'sheet' cards */
 .sheet .eyebrow::before { background: var(--paper-ink); }

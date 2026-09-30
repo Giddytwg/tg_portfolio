@@ -64,9 +64,6 @@ if (nav && menu && menuBtn) {
 
 /* reveal.js */
 try {
-const heroEl = $(".hero");
-if (heroEl) requestAnimationFrame(() => requestAnimationFrame(() => heroEl.classList.add("is-in")));
-
 const revealEls = $$(".rv");
 if (reduceMotion || !("IntersectionObserver" in window)) {
   revealEls.forEach((el) => el.classList.add("is-in"));
