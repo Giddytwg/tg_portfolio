@@ -69,9 +69,10 @@
   .status { justify-self: start; }
 }
 .hero__stage { position: relative; padding-inline: var(--gutter); max-width: var(--maxw); margin-inline: auto; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: clamp(16px, 3vw, 48px); }
-.hero__name { display: block; }
+/* media comes first in the HTML (so phones can simply stack it on top); desktop places it in column 2 */
+.hero__name { display: block; grid-column: 1; grid-row: 1; }
 .hero__name span { display: block; font-size: clamp(3rem, min(12.4vw, 22vh), 11.6rem); line-height: .86; }
-.hero__media { position: relative; width: clamp(130px, min(19vw, 30vh), 290px); justify-self: end; }
+.hero__media { position: relative; width: clamp(130px, min(19vw, 30vh), 290px); justify-self: end; grid-column: 2; grid-row: 1; }
 .hero__portrait { aspect-ratio: 3 / 4; border-radius: clamp(14px, 1.6vw, 22px); overflow: hidden; transform: rotate(3deg); box-shadow: 0 40px 80px -20px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .08); transition: transform .8s var(--ease); }
 .hero__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
 .hero:hover .hero__portrait { transform: rotate(-1.5deg) scale(1.02); }
@@ -91,9 +92,14 @@
 @media (max-width: 960px) {
   .hero__foot { grid-template-columns: 1fr; }
 }
+/* Phones: no flex/grid in the hero at all — plain stacked blocks, which every browser lays out the same way. */
 @media (max-width: 640px) {
-  .hero__stage { grid-template-columns: 1fr; align-items: start; gap: 14px; }
-  .hero__media { order: -1; width: 34vw; justify-self: end; margin-bottom: 4px; }
+  .hero { display: block; min-height: 0; }
+  .hero__stage, .hero__foot, .hero__intro { display: block; }
+  .hero__media { width: 34vw; margin: 0 0 14px auto; }
+  .hero__name { margin-bottom: 14px; }
+  .hero__intro > * + * { margin-top: 18px; }
+  .status { display: inline-flex; margin-top: 24px; }
   .hero__badge { width: 22vw; transform: translate(-46%, 30%); }
   .hero__name span { font-size: 18.4vw; }
   .hero__title { font-size: 1.4rem; }
